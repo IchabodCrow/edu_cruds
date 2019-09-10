@@ -1,6 +1,5 @@
-let state = [
-
-  {name:   'Лионель Месси',
+let state = {
+  sportsman: [{name:   'Лионель Месси',
    sport:  'Футбол',
    salary: '$ 127 млн',
 },
@@ -39,9 +38,12 @@ let state = [
   {name:   'Кевин Дюран',
    sport:  'Баскетбол',
    salary: '$ 65,4 млн',
-},
-]
-
+},],
+  sort: {
+    field: 'name',
+    direction: 'asc',
+  }
+}
 const setState = (newState) => {
   if (state != newState) {
     state = newState;
@@ -57,7 +59,7 @@ const renderRow = (sportsman) => {
   '</div>';
 }
 
-const renderTable = () => state.map(renderRow).join('');
+const renderTable = () => state.sportsman.map(renderRow).join('');
 
 const render = () => {
   document.getElementById('container').innerHTML = renderTable() + '</div>';
@@ -74,19 +76,19 @@ function addSportsman () {
       sport:  document.getElementById('sportInp').value,
       salary: document.getElementById('solaryInp').value,
   };
-  setState([...state,newObject]);
+  setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
 let but = document.getElementById('but');
 
 but.addEventListener('click', addSportsman);
 
 function sortString() {
-  setState([...state.sort((a, b) => a.name > b.name ? 1 : -1)]) ;
+  setState([...state.sportsman].sort((a, b) => a.name > b.name ? 1 : -1)) ;
   document.getElementById('sortBut').value = "Я-А";
 }
 
 function sortStringRevers() {
-  setState([...state.sort((a, b) => a.name < b.name ? 1 : -1)]) ;
+  setState([...state.sportsman].sort((a, b) => a.name < b.name ? 1 : -1)) ;
   document.getElementById('sortBut').value = "А-Я";
 }
 
@@ -102,3 +104,4 @@ let sortBut = document.getElementById('sortBut');
 sortBut.addEventListener('click', choiseMehtodSort );
 
 console.log( document.getElementById('sortBut').value);
+console.log(state.sportsman);
