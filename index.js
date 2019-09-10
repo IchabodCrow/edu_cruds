@@ -48,9 +48,6 @@ const setState = (newState) => {
     render();
   }
 }
-const setStateSort = () => {
-  render();
-}
 
 const renderRow = (sportsman) => {
   return '<div>' +
@@ -79,12 +76,29 @@ function addSportsman () {
   };
   setState([...state,newObject]);
 };
+let but = document.getElementById('but');
 
 but.addEventListener('click', addSportsman);
 
 function sortString() {
-  state.sort((a, b) => a.name > b.name ? 1 : -1);
-  setStateSort([...state]);
+  setState([...state.sort((a, b) => a.name > b.name ? 1 : -1)]) ;
+  document.getElementById('sortBut').value = "Я-А";
 }
 
-sortBut.addEventListener('click', sortString);
+function sortStringRevers() {
+  setState([...state.sort((a, b) => a.name < b.name ? 1 : -1)]) ;
+  document.getElementById('sortBut').value = "А-Я";
+}
+
+function choiseMehtodSort () {
+    if ( sortBut.value === "А-Я") {
+      sortString();
+    } else {
+      sortStringRevers();
+    }
+}
+
+let sortBut = document.getElementById('sortBut');
+sortBut.addEventListener('click', choiseMehtodSort );
+
+console.log( document.getElementById('sortBut').value);
