@@ -62,7 +62,7 @@ const renderRow = (sportsman) => {
 const renderTable = () => state.sportsman.map(renderRow).join('');
 
 const render = () => {
-  document.getElementById('container').innerHTML = renderTable() + '</div>';
+  document.getElementsByClassName('container').innerHTML = renderTable() + '</div>';
 }
 
 window.onload = function() {
@@ -72,24 +72,24 @@ window.onload = function() {
 function addSportsman () {
 
   let newObject = {
-      name:   document.getElementById('nameInp').value,
-      sport:  document.getElementById('sportInp').value,
-      salary: document.getElementById('solaryInp').value,
+      name:   document.getElementsByClassName('nameInp').value,
+      sport:  document.getElementsByClassName('sportInp').value,
+      salary: document.getElementsByClassName('solaryInp').value,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
-let but = document.getElementById('but');
+let but = document.getElementsByClassName('but');
 
 but.addEventListener('click', addSportsman);
 
 function sortString() {
-  setState([...state.sportsman].sort((a, b) => a.name > b.name ? 1 : -1)) ;
-  document.getElementById('sortBut').value = "Я-А";
+  setState({...state, sportsman.sort((a, b) => a.name > b.name ? 1 : -1))} ;
+  document.getElementsByClassName('sortBut').value = "Я-А";
 }
 
 function sortStringRevers() {
-  setState([...state.sportsman].sort((a, b) => a.name < b.name ? 1 : -1)) ;
-  document.getElementById('sortBut').value = "А-Я";
+  setState({...state, sportsman.sort((a, b) => a.name < b.name ? 1 : -1))} ;
+  document.getElementsByClassName('sortBut').value = "А-Я";
 }
 
 function choiseMehtodSort () {
@@ -100,8 +100,8 @@ function choiseMehtodSort () {
     }
 }
 
-let sortBut = document.getElementById('sortBut');
+let sortBut = document.getElementsByClassName('sortBut');
 sortBut.addEventListener('click', choiseMehtodSort );
 
-console.log( document.getElementById('sortBut').value);
+console.log( document.getElementsByClassName('sortBut').value);
 console.log(state.sportsman);
