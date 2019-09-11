@@ -59,15 +59,17 @@ const renderRow = (sportsman) => {
   '</div>';
 }
 
-const renderTable = () => state.sportsman.map(renderRow).join('');
-
-const render = () => {
-  document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
+const renderHeaders = () => {
+  return '<div>' +
+  '<div>' + 'Имя' + '</div>' +
+  '<div>' + 'Спорт' + '</div>' +
+  '<div>' + 'Заработок' + '</div>' +
+  '</div>';
+  '<input type="button" id="sortBut" value="А-Я">';
 }
 
-window.onload = function() {
-  render();
-};
+const renderTable = () => state.sportsman.map(renderRow).join('');
+
 
 function addSportsman () {
 
@@ -100,14 +102,11 @@ function choiseMehtodSort () {
     }
 }
 
-let sortBut = document.getElementById('sortBut');
-sortBut.addEventListener('click', choiseMehtodSort );
+// const sortBut = document.getElementById('sortBut');
+// sortBut.addEventListener('click', choiseMehtodSort );
 
-const renderHeaders = () => {
-  return '<div>' +
-  '<div>' + 'Имя' + '</div>' +
-  '<div>' + 'Спорт' + '</div>' +
-  '<div>' + 'Заработок' + '</div>' +
-  '</div>';
-  '<input type="button" id="sortBut" value="А-Я">';
+const render = () => {
+  document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
 }
+
+window.onload = () => render();
