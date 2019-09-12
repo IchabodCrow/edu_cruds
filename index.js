@@ -59,8 +59,23 @@ const renderRow = (sportsman) => {
   '</div>';
 }
 
+<<<<<<< HEAD
 const renderTable = () => state.sportsman.map(renderRow).join('');
 
+=======
+const renderHeaders = () => {
+  return '<div>' +
+  '<div>' + 'Имя' + '</div>' +
+  '<div>' + 'Спорт' + '</div>' +
+  '<div>' + 'Заработок' + '</div>' +
+  '</div>';
+  '<input type="button" id="sortBut" value="А-Я">';
+}
+
+const renderTable = () => state.sportsman.map(renderRow).join('');
+
+
+>>>>>>> bb628b2da93454652131554fa855e349643d95b1
 function addSportsman () {
 
   let newObject = {
@@ -102,12 +117,21 @@ function choiseMehtodSort () {
     }
 }
 
+<<<<<<< HEAD
 let sortBut = document.getElementById('sortBut');
+=======
+// const sortBut = document.getElementById('sortBut');
+>>>>>>> bb628b2da93454652131554fa855e349643d95b1
 // sortBut.addEventListener('click', choiseMehtodSort );
 
 const render = () => {
   document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
 }
+<<<<<<< HEAD
 window.onload = function() {
   render();
 };
+=======
+
+window.onload = () => render();
+>>>>>>> bb628b2da93454652131554fa855e349643d95b1
