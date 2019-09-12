@@ -100,12 +100,9 @@ function choiseMehtodSort() {
     }
 }
 
-const sortBut = document.getElementById('sortBut');
-
-document.getElementByTagName('body')
-[0].addEventListener('click', function (event) {
-  if (!event.target.matches('.sortBut')) return;
-  event.preventDefault();
+document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
+  if (!event.target.matches('sortBut')) return;
+  choiseMehtodSort();
 }, false);
 
 const render = () => {
