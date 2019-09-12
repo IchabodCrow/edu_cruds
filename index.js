@@ -61,14 +61,6 @@ const renderRow = (sportsman) => {
 
 const renderTable = () => state.sportsman.map(renderRow).join('');
 
-const render = () => {
-  document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
-}
-
-window.onload = function() {
-  render();
-};
-
 function addSportsman () {
 
   let newObject = {
@@ -81,6 +73,16 @@ function addSportsman () {
 let but = document.getElementById('but');
 
 but.addEventListener('click', addSportsman);
+
+const renderHeaders = () => {
+  return '<input type="button" id="sortBut" value="А-Я">';
+  '<div>' +
+  '<div>' + 'Имя' + '</div>' +
+  '<div>' + 'Спорт' + '</div>' +
+  '<div>' + 'Заработок' + '</div>' +
+  '</div>';
+
+}
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
@@ -101,13 +103,11 @@ function choiseMehtodSort () {
 }
 
 let sortBut = document.getElementById('sortBut');
-sortBut.addEventListener('click', choiseMehtodSort );
+// sortBut.addEventListener('click', choiseMehtodSort );
 
-const renderHeaders = () => {
-  return '<div>' +
-  '<div>' + 'Имя' + '</div>' +
-  '<div>' + 'Спорт' + '</div>' +
-  '<div>' + 'Заработок' + '</div>' +
-  '</div>';
-  '<input type="button" id="sortBut" value="А-Я">';
+const render = () => {
+  document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
 }
+window.onload = function() {
+  render();
+};
