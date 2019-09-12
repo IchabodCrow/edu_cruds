@@ -62,12 +62,11 @@ const renderRow = (sportsman) => {
 const renderTable = () => state.sportsman.map(renderRow).join('');
 
 const renderHeaders = () => {
-  return '<div>' +
-  '<div>' + 'Имя' + '</div>' +
-  '<div>' + 'Спорт' + '</div>' +
-  '<div>' + 'Заработок' + '</div>' +
-  '</div>';
-  '<input type="button" id="sortBut" value="А-Я">';
+  return `<div>
+  <div> Имя <input type="button" id="sortBut" value="А-Я"> </div>
+  <div> Спорт </div>
+  <div> Заработок </div>
+  </div>`;
 }
 
 function addSportsman () {
@@ -102,7 +101,12 @@ function choiseMehtodSort() {
 }
 
 const sortBut = document.getElementById('sortBut');
-// sortBut.addEventListener('click', choiseMehtodSort );
+
+document.getElementByTagName('body')
+[0].addEventListener('click', function (event) {
+  if (!event.target.matches('.sortBut')) return;
+  event.preventDefault();
+}, false);
 
 const render = () => {
   document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
