@@ -59,10 +59,8 @@ const renderRow = (sportsman) => {
   '</div>';
 }
 
-<<<<<<< HEAD
 const renderTable = () => state.sportsman.map(renderRow).join('');
 
-=======
 const renderHeaders = () => {
   return '<div>' +
   '<div>' + 'Имя' + '</div>' +
@@ -72,10 +70,6 @@ const renderHeaders = () => {
   '<input type="button" id="sortBut" value="А-Я">';
 }
 
-const renderTable = () => state.sportsman.map(renderRow).join('');
-
-
->>>>>>> bb628b2da93454652131554fa855e349643d95b1
 function addSportsman () {
 
   let newObject = {
@@ -85,19 +79,9 @@ function addSportsman () {
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
+
 let but = document.getElementById('but');
-
 but.addEventListener('click', addSportsman);
-
-const renderHeaders = () => {
-  return '<input type="button" id="sortBut" value="А-Я">';
-  '<div>' +
-  '<div>' + 'Имя' + '</div>' +
-  '<div>' + 'Спорт' + '</div>' +
-  '<div>' + 'Заработок' + '</div>' +
-  '</div>';
-
-}
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
@@ -109,7 +93,7 @@ function sortStringRevers() {
   document.getElementById('sortBut').value = "А-Я";
 }
 
-function choiseMehtodSort () {
+function choiseMehtodSort() {
     if ( sortBut.value === "А-Я") {
       sortString();
     } else {
@@ -117,21 +101,13 @@ function choiseMehtodSort () {
     }
 }
 
-<<<<<<< HEAD
-let sortBut = document.getElementById('sortBut');
-=======
-// const sortBut = document.getElementById('sortBut');
->>>>>>> bb628b2da93454652131554fa855e349643d95b1
+const sortBut = document.getElementById('sortBut');
 // sortBut.addEventListener('click', choiseMehtodSort );
 
 const render = () => {
   document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
 }
-<<<<<<< HEAD
+
 window.onload = function() {
   render();
 };
-=======
-
-window.onload = () => render();
->>>>>>> bb628b2da93454652131554fa855e349643d95b1
