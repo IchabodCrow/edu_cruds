@@ -44,6 +44,7 @@ let state = {
     direction: 'asc',
   }
 }
+
 const setState = (newState) => {
   if (state != newState) {
     state = newState;
@@ -69,27 +70,35 @@ const renderHeaders = () => {
   </div>`;
 }
 
+const render = () => {
+  document.getElementsByClassName('container').innerHTML = renderHeaders() +  renderTable() + '</div>';
+}
+
+window.onload = function() {
+  render();
+};
+
 function addSportsman () {
 
   let newObject = {
-      name:   document.getElementById('nameInp').value,
-      sport:  document.getElementById('sportInp').value,
-      salary: document.getElementById('solaryInp').value,
+      name:   document.getElementsByClassName('nameInp').value,
+      sport:  document.getElementsByClassName('sportInp').value,
+      salary: document.getElementsByClassName('solaryInp').value,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
 
-let but = document.getElementById('but');
-but.addEventListener('click', addSportsman);
+// let but = document.getElementsByClassName('but');
+// but.addEventListener('click', addSportsman);
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
-  document.getElementById('sortBut').value = "Я-А";
+  document.getElementsByClassName('sortBut').value = "Я-А";
 }
 
 function sortStringRevers() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)]}) ;
-  document.getElementById('sortBut').value = "А-Я";
+  document.getElementsByClassName('sortBut').value = "А-Я";
 }
 
 function choiseMehtodSort() {
@@ -101,14 +110,6 @@ function choiseMehtodSort() {
 }
 
 document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
-  if (!event.target.matches('sortBut')) return;
-  choiseMehtodSort();
+   if (!event.target.matches('.sortBut')) return;
+   choiseMehtodSort();
 }, false);
-
-const render = () => {
-  document.getElementById('container').innerHTML = renderHeaders() + renderTable() + '</div>';
-}
-
-window.onload = function() {
-  render();
-};
