@@ -71,7 +71,7 @@ const renderHeaders = () => {
 }
 
 const render = () => {
-  document.getElementsByClassName('container').innerHTML = renderHeaders() +  renderTable() + '</div>';
+  document.getElementsByClassName('container')[0].innerHTML = renderHeaders() +  renderTable() + '</div>';
 }
 
 window.onload = function() {
@@ -81,24 +81,24 @@ window.onload = function() {
 function addSportsman () {
 
   let newObject = {
-      name:   document.getElementsByClassName('nameInp').value,
-      sport:  document.getElementsByClassName('sportInp').value,
-      salary: document.getElementsByClassName('solaryInp').value,
+      name:   document.getElementsByClassName('nameInp')[0].value,
+      sport:  document.getElementsByClassName('sportInp')[0].value,
+      salary: document.getElementsByClassName('solaryInp')[0].value,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
 
-// let but = document.getElementsByClassName('but');
+// let but = document.getElementsByClassName('but')[0];
 // but.addEventListener('click', addSportsman);
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
-  document.getElementsByClassName('sortBut').value = "Я-А";
+  document.getElementsByClassName('sortBut')[0].value = "Я-А";
 }
 
 function sortStringRevers() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)]}) ;
-  document.getElementsByClassName('sortBut').value = "А-Я";
+  document.getElementsByClassName('sortBut')[0].value = "А-Я";
 }
 
 function choiseMehtodSort() {
