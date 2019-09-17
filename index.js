@@ -54,9 +54,9 @@ const setState = (newState) => {
 
 const renderRow = (sportsman) => {
   return '<div>' +
-  '<div id="first">' + sportsman.name + '</div>' +
-  '<div id="second">' + sportsman.sport + '</div>' +
-  '<div id="three">' + sportsman.salary + '</div>' +
+  '<div class="first">' + sportsman.name + '</div>' +
+  '<div class="second">' + sportsman.sport + '</div>' +
+  '<div class="three">' + sportsman.salary + '</div>' +
   '</div>';
 }
 
@@ -64,7 +64,7 @@ const renderTable = () => state.sportsman.map(renderRow).join('');
 
 const renderHeaders = () => {
   return `<div>
-  <div> Имя <input type="button" id="sortBut" value="А-Я"> </div>
+  <div> Имя <input type="button" class="sortBut" value="А-Я"> </div>
   <div> Спорт </div>
   <div> Заработок </div>
   </div>`;
@@ -88,8 +88,8 @@ function addSportsman () {
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
 
-// let but = document.getElementsByClassName('but')[0];
-// but.addEventListener('click', addSportsman);
+ let but = document.getElementsByClassName('but')[0];
+ but.addEventListener('click', adportsman);
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;

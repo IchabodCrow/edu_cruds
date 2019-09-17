@@ -4,7 +4,7 @@ body {
   overflow: auto;
 }
 
-#first, #second, #three, #hat {
+.first, .second, .three, .hat {
   text-align: center;
   width: 200px;
   height: 40px;
@@ -14,12 +14,12 @@ body {
   overflow: auto;
 }
 
-#second {
+.second {
   left:4px;
 
 }
 
-#three {
+.three {
   left:8px;
 }
 input {
@@ -32,7 +32,7 @@ input {
 
 @media screen and (min-width:320px) and (max-width:480px) {
 
-#first, #second, #three, #hat {
+.first, .second, .three, .hat {
   display: inline-block;
   width: 62px;
   height: 20px;
