@@ -97,17 +97,19 @@ function addSportsman () {
 document.getElementsByClassName('but')[0].addEventListener('click', addSportsman);
 
 function sortString() {
-  setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
-  state.sort.direction = 'desc';
+  const sportsman = [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)];
+  const sort = {...state.sort, direction: 'asc' };
+  setState({...state, sportsman, sort});
 }
 
 function sortStringRevers() {
-  setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)]}) ;
-  state.sort.direction = 'asc';
+  const sportsman = [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)];
+  const sort = {...state.sort, direction: 'desc' };
+  setState({...state, sportsman, sort});
 }
 
 function choiseMehtodSort() {
-    if ( state.sort.direction === 'asc') {
+    if (state.sort.direction === 'desc') {
       sortString();
     } else {
       sortStringRevers();
