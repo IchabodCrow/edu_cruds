@@ -98,16 +98,16 @@ document.getElementsByClassName('but')[0].addEventListener('click', addSportsman
 
 function sortString() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)]}) ;
-  document.getElementsByClassName('sortBut')[0].value = "Я-А";
+  state.sort.direction = 'desc';
 }
 
 function sortStringRevers() {
   setState({...state, sportsman : [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)]}) ;
-  document.getElementsByClassName('sortBut')[0].value = "А-Я";
+  state.sort.direction = 'asc';
 }
 
 function choiseMehtodSort() {
-    if ( document.getElementsByClassName('sortBut')[0].value === "А-Я") {
+    if ( state.sort.direction === 'asc') {
       sortString();
     } else {
       sortStringRevers();
