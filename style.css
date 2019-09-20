@@ -1,10 +1,11 @@
-div {
-  display: inline-block;
-  overflow: auto;
+button {
+  display: block;
 }
 .cell {
   border: 1px solid black;
   text-align: center;
+  display: inline-block;
+  overflow: auto;
 }
 .nameInp, .sportInp, .solaryInp, .cell {
   margin:1px;
@@ -15,9 +16,8 @@ div {
   margin-bottom: 20px;
 }
 .table {
-  width:1000px;
+  width:840px;
 }
 .table-header {
   font-weight: bold;
-  text-align: center;
 }

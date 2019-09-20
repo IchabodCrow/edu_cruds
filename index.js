@@ -4,42 +4,52 @@ let state = {
       name:   'Лионель Месси',
       sport:  'Футбол',
       salary: '$ 127 млн',
+      id: '1',
     }, {
       name:   'Криштиану Роналду',
       sport:   'Футбол',
       salary:  '$ 109 млн',
+      id: '2',
     }, {
       name:   'Неймар',
       sport:  'Футбол',
       salary: '$ 105 млн',
+      id: '3',
     }, {
       name:   'Канело Альварес',
       sport:  'Бокс',
       salary: '$ 94 млн',
+      id: '4',
     }, {
       name:   'Роджер Федерер',
       sport:  'Большой тенис',
       salary: '$ 93,4 млн',
+      id: '5',
     }, {
       name:   'Рассел Уилсон',
       sport:  'Американский футбол',
       salary: '$ 89,5 млн',
+      id: '6',
     }, {
       name:   'Аарон Роджерс',
       sport:  'Американский футбол',
       salary: '$ 89,3 млн',
+      id: '7',
     }, {
       name:   'Леброн Джеймс',
       sport:  'Баскетбол',
       salary: '$ 89 млн',
+      id: '8',
     }, {
       name:   'Стивен Карри',
       sport:  'Баскетбол',
       salary: '$ 79,8 млн',
+      id: '9',
     }, {
       name:   'Кевин Дюран',
       sport:  'Баскетбол',
       salary: '$ 65,4 млн',
+      id: '10',
     },
   ],
   sort: {
@@ -60,6 +70,7 @@ const renderRow = (sportsman) => {
   <div class="cell">${sportsman.name}</div>
   <div class="cell">${sportsman.sport}</div>
   <div class="cell">${sportsman.salary}</div>
+  <div class="cell">${sportsman.id++}</div>
   </div>`;
 }
 
@@ -70,9 +81,10 @@ const renderTable = () => `
 
 const renderHeaders = () => {
   return `<div class="table-header">
-  <div class="cell">Имя <button class="sortBut">А-Я</button"></div>
+  <div class="cell">Имя <button class="sortBut"> ${state.sort.direction === 'desc' ? "Я-А" :"А-Я"}</button"></div>
   <div class="cell">Спорт</div>
   <div class="cell">Заработок</div>
+  <div class="cell">Номер</div>
   </div>`;
 }
 
@@ -90,6 +102,7 @@ function addSportsman () {
       name:   document.getElementsByClassName('nameInp')[0].value,
       sport:  document.getElementsByClassName('sportInp')[0].value,
       salary: document.getElementsByClassName('solaryInp')[0].value,
+      id:     state.sportsman[1].id-2,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
