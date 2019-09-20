@@ -58,6 +58,8 @@ let state = {
   }
 }
 
+let lastId = 10;
+
 const setState = (newState) => {
   if (state != newState) {
     state = newState;
@@ -71,6 +73,7 @@ const renderRow = (sportsman) => {
   <div class="cell">${sportsman.sport}</div>
   <div class="cell">${sportsman.salary}</div>
   <div class="cell">${sportsman.id}</div>
+  <button class="delSportsman" data-id='${sportsman.id}'>Удалить спортсмена</button>
   </div>`;
 }
 
@@ -97,16 +100,15 @@ window.onload = function() {
 };
 
 function addSportsman () {
-
+    lastId++;
   let newObject = {
       name:   document.getElementsByClassName('nameInp')[0].value,
       sport:  document.getElementsByClassName('sportInp')[0].value,
       salary: document.getElementsByClassName('solaryInp')[0].value,
-      id:     [...state.sportsman[9].id+1],
+      id:  lastId,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
-
 
 document.getElementsByClassName('but')[0].addEventListener('click', addSportsman);
 
@@ -131,6 +133,4 @@ function choiseMehtodSort() {
 }
 
 document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
-   if (!event.target.matches('.sortBut')) return;
-   choiseMehtodSort();
-}, false);
+   if (event.target.matches('.sortBut')) choiseMehtodSort(); }, false);
