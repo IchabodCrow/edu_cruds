@@ -70,7 +70,7 @@ const renderRow = (sportsman) => {
   <div class="cell">${sportsman.name}</div>
   <div class="cell">${sportsman.sport}</div>
   <div class="cell">${sportsman.salary}</div>
-  <div class="cell">${sportsman.id++}</div>
+  <div class="cell">${sportsman.id}</div>
   </div>`;
 }
 
@@ -102,10 +102,11 @@ function addSportsman () {
       name:   document.getElementsByClassName('nameInp')[0].value,
       sport:  document.getElementsByClassName('sportInp')[0].value,
       salary: document.getElementsByClassName('solaryInp')[0].value,
-      id:     state.sportsman[1].id-2,
+      id:     [...state.sportsman[9].id+1],
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
+
 
 document.getElementsByClassName('but')[0].addEventListener('click', addSportsman);
 
