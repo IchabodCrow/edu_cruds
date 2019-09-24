@@ -57,6 +57,7 @@ let state = {
     direction: 'asc',
   }
 }
+  // Отрисовываем таблицу
 
 let lastId = 10;
 
@@ -99,6 +100,8 @@ window.onload = function() {
   render();
 };
 
+// Добавляем новых спортсменов
+
 function addSportsman () {
     lastId++;
   let newObject = {
@@ -111,6 +114,8 @@ function addSportsman () {
 };
 
 document.getElementsByClassName('but')[0].addEventListener('click', addSportsman);
+
+// Методы сортировки
 
 function sortString() {
   const sportsman = [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)];
@@ -131,6 +136,13 @@ function choiseMehtodSort() {
       sortStringRevers();
     }
 }
-
+// Работа с кнопками
 document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
    if (event.target.matches('.sortBut')) choiseMehtodSort(); }, false);
+
+// Удаление строк
+const deleteSportsman = sportsmanId => {
+  let arraySportsman = state.filter(function(obj) {
+    return obj.id != document.getElementsByClassName('delSportsman').dataset.id;
+});
+}
