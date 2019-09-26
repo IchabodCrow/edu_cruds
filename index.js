@@ -137,12 +137,16 @@ function choiseMehtodSort() {
     }
 }
 // Работа с кнопками
+let box = document.getElementById('delSportsman');
 document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
-   if (event.target.matches('.sortBut')) choiseMehtodSort(); }, false);
+   if (event.target.matches('.sortBut')) choiseMehtodSort();
+   if (event.target.matches('.delSportsman'))  deleteSportsman(event.target.dataset.id);
+}, false);
 
 // Удаление строк
 const deleteSportsman = sportsmanId => {
-  let arraySportsman = state.filter(function(obj) {
-    return obj.id != document.getElementsByClassName('delSportsman').dataset.id;
-});
-}
+  const sportsman = state.sportsman.filter(function(obj) {
+    return obj.id != sportsmanId;
+  });
+  setState({...state, sportsman});
+};
