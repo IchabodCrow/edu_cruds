@@ -69,13 +69,25 @@ const setState = (newState) => {
 }
 
 const renderRow = (sportsman) => {
-  return `<div>
-  <div class="cell">${sportsman.name}</div>
-  <div class="cell">${sportsman.sport}</div>
-  <div class="cell">${sportsman.salary}</div>
-  <div class="cell">${sportsman.id}</div>
-  <button class="delSportsman" data-id='${sportsman.id}'>Удалить спортсмена</button>
-  </div>`;
+  if (document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
+    if (event.target.matches('.upDate')) replaceInp(event.target.dataset.id);
+  }, false)) {
+    return `<div>
+    <input class="replace" placeholder="${sportsman.name}">
+    <input class="replace" placeholder="${sportsman.sport}">
+    <input class="replace" placeholder="${sportsman.salary}">
+    </div>
+    `
+  } else {
+    return `<div>
+    <div class="cell">${sportsman.name}</div>
+    <div class="cell">${sportsman.sport}</div>
+    <div class="cell">${sportsman.salary}</div>
+    <div class="cell">${sportsman.id}</div>
+    <button class="delSportsman" data-id='${sportsman.id}'>Удалить спортсмена</button>
+    <button class="upDate" data-id='${sportsman.id}'>Редактировать</button>
+    </div>`;
+  }
 }
 
 const renderTable = () => `
@@ -137,16 +149,29 @@ function choiseMehtodSort() {
     }
 }
 // Работа с кнопками
-let box = document.getElementById('delSportsman');
+
 document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
    if (event.target.matches('.sortBut')) choiseMehtodSort();
-   if (event.target.matches('.delSportsman'))  deleteSportsman(event.target.dataset.id);
+   if (event.target.matches('.delSportsman')) deleteSportsman(event.target.dataset.id);
+   if (event.target.matches('.upDate')) replaceInp(event.target.dataset.id);
 }, false);
 
 // Удаление строк
+
 const deleteSportsman = sportsmanId => {
   const sportsman = state.sportsman.filter(function(obj) {
     return obj.id != sportsmanId;
   });
   setState({...state, sportsman});
 };
+
+// Редактирование строк
+
+const replaceInp = (sportsman) =>  {
+  return `<div>
+  <input class="replace" placeholder="${sportsman.name}">
+  <input class="replace" placeholder="${sportsman.sport}">
+  <input class="replace" placeholder="${sportsman.salary}">
+  </div>
+  `
+}
