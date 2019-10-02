@@ -55,7 +55,8 @@ let state = {
   sort: {
     field: 'name',
     direction: 'asc',
-  }
+  },
+  editingId: 0,
 }
   // Отрисовываем таблицу
 
@@ -70,9 +71,9 @@ const setState = (newState) => {
 
 const renderRow = (sportsman) => {
   return `<div>
-  <div class="cell">${sportsman.name}</div>
-  <div class="cell">${sportsman.sport}</div>
-  <div class="cell">${sportsman.salary}</div>
+  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.name}'>` : sportsman.name}</div>
+  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.sport}'>` : sportsman.sport}</div>
+  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.salary}'>` : sportsman.salary}</div>
   <div class="cell">${sportsman.id}</div>
   <button class="delSportsman" data-id='${sportsman.id}'>Удалить спортсмена</button>
   <button class="upDate" data-id='${sportsman.id}'>Редактировать</button>
@@ -147,7 +148,7 @@ document.getElementsByTagName('body')[0].addEventListener('click', function (eve
 
 // Удаление строк
 
-const deleteSportsman = sportsmanId => {
+const deleteSportsman = (sportsmanId) => {
   const sportsman = state.sportsman.filter(function(obj) {
     return obj.id != sportsmanId;
   });
@@ -156,11 +157,7 @@ const deleteSportsman = sportsmanId => {
 
 // Редактирование строк
 
-const replaceInp = (sportsman) =>  {
-  return `<div>
-  <input class="replace" placeholder="${sportsman.name}">
-  <input class="replace" placeholder="${sportsman.sport}">
-  <input class="replace" placeholder="${sportsman.salary}">
-  </div>
-  `
+const replaceInp = (sportsmanId) => {
+  state.editingId = sportsmanId;
+  setState({...state, sportsmanId});
 }

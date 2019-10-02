@@ -7,7 +7,12 @@ button {
   display: inline-block;
   overflow: auto;
 }
-.nameInp, .sportInp, .solaryInp, .cell {
+.inpReplace {
+  width:200px;
+  height: 40px;
+  overflow: hidden;
+}
+.nameInp, .sportInp, .solaryInp, .inpReplace, .cell {
   margin:1px;
   width:200px;
   height: 40px;
