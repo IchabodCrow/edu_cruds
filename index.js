@@ -70,15 +70,18 @@ const setState = (newState) => {
 }
 
 const renderRow = (sportsman) => {
+  const isEditingRow = sportsman.id == state.editingId;
   return `<div>
-  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.name}'>` : sportsman.name}</div>
-  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.sport}'>` : sportsman.sport}</div>
-  <div class="cell">${sportsman.id == state.editingId ? `<input class="inpReplace" placeholder='${sportsman.salary}'>` : sportsman.salary}</div>
+  <div class="cell">${isEditingRow ? `<input class="inpReplace" value='${sportsman.name}'>` : sportsman.name}</div>
+  <div class="cell">${isEditingRow ? `<input class="inpReplace" value='${sportsman.sport}'>` : sportsman.sport}</div>
+  <div class="cell">${isEditingRow ? `<input class="inpReplace" value='${sportsman.salary}'>` : sportsman.salary}</div>
   <div class="cell">${sportsman.id}</div>
   <button class="delSportsman" data-id='${sportsman.id}'>Удалить спортсмена</button>
-  <button class="upDate" data-id='${sportsman.id}'>Редактировать</button>
+  ${ isEditingRow ?
+     `<button class="save" data-id='${sportsman.id}'> Сохранить</button>`
+      : `<button class="upDate" data-id='${sportsman.id}'> Редактировать</button>`}
   </div>`;
-}
+};
 
 const renderTable = () => `
   ${renderHeaders()}
@@ -144,6 +147,7 @@ document.getElementsByTagName('body')[0].addEventListener('click', function (eve
    if (event.target.matches('.sortBut')) choiseMehtodSort();
    if (event.target.matches('.delSportsman')) deleteSportsman(event.target.dataset.id);
    if (event.target.matches('.upDate')) replaceInp(event.target.dataset.id);
+   if (event.target.matches('.save')) saveSportsman(event.target.dataset.id);
 }, false);
 
 // Удаление строк
@@ -157,7 +161,19 @@ const deleteSportsman = (sportsmanId) => {
 
 // Редактирование строк
 
-const replaceInp = (sportsmanId) => {
-  state.editingId = sportsmanId;
-  setState({...state, sportsmanId});
+const replaceInp = (editingId) => {
+  setState({...state, editingId});
+};
+
+const saveSportsman = (id) => {
+  const newSportsman = {
+      name: document.getElementsByClassName('inpReplace')[0].value,
+      sport: document.getElementsByClassName('inpReplace')[1].value,
+      salary: document.getElementsByClassName('inpReplace')[2].value,
+      id,
+  }
+  const sportsman = state.sportsman.map(s => s.id == id ? newSportsman : s);
+  setState({...state, sportsman, editingId: 0})
 }
+
+//

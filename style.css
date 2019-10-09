@@ -12,7 +12,7 @@ button {
   height: 40px;
   overflow: hidden;
 }
-.nameInp, .sportInp, .solaryInp, .inpReplace, .cell {
+.nameInp, .sportInp, .solaryInp, .cell {
   margin:1px;
   width:200px;
   height: 40px;
@@ -21,7 +21,7 @@ button {
   margin-bottom: 20px;
 }
 .table {
-  width:840px;
+  /*width:840px;*/
 }
 .table-header {
   font-weight: bold;
