@@ -99,6 +99,7 @@ const renderHeaders = () => {
 
 const render = () => {
   $('.table').html(renderTable());
+  
 }
 
 window.onload = function() {
