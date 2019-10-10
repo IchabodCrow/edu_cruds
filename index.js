@@ -99,7 +99,7 @@ const renderHeaders = () => {
 
 const render = () => {
   $('.table').html(renderTable());
-  
+
 }
 
 window.onload = function() {
@@ -144,12 +144,10 @@ function choiseMehtodSort() {
 }
 // Работа с кнопками
 
-$('body').bind('click', function (event) {
-   if (event.target.matches('.sortBut')) choiseMehtodSort();
-   if (event.target.matches('.delSportsman')) deleteSportsman(event.target.dataset.id);
-   if (event.target.matches('.upDate')) replaceInp(event.target.dataset.id);
-   if (event.target.matches('.save')) saveSportsman(event.target.dataset.id);
-}, false);
+$('body').on('click','.sortBut', choiseMehtodSort);
+$('body').on('click','.delSportsman', () => deleteSportsman(event.target.dataset.id));
+$('body').on('click','.upDate', () => replaceInp(event.target.dataset.id));
+$('body').on('click','.save', () => saveSportsman(event.target.dataset.id));
 
 // Удаление строк
 
@@ -168,9 +166,9 @@ const replaceInp = (editingId) => {
 
 const saveSportsman = (id) => {
   const newSportsman = {
-      name: document.getElementsByClassName('inpReplace')[0].value,
-      sport: document.getElementsByClassName('inpReplace')[1].value,
-      salary: document.getElementsByClassName('inpReplace')[2].value,
+      name: $('.inpReplace').val(),
+      sport: $('.inpReplace').val(),
+      salary: $('.inpReplace').val(),
       id,
   }
   const sportsman = state.sportsman.map(s => s.id == id ? newSportsman : s);
