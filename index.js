@@ -98,7 +98,7 @@ const renderHeaders = () => {
 }
 
 const render = () => {
-  document.getElementsByClassName('table')[0].innerHTML = renderTable();
+  $('.table').html(renderTable());
 }
 
 window.onload = function() {
@@ -110,15 +110,15 @@ window.onload = function() {
 function addSportsman () {
     lastId++;
   let newObject = {
-      name:   document.getElementsByClassName('nameInp')[0].value,
-      sport:  document.getElementsByClassName('sportInp')[0].value,
-      salary: document.getElementsByClassName('solaryInp')[0].value,
+      name:   $('.nameInp').val(),
+      sport:  $('.sportInp').val(),
+      salary: $('.solaryInp').val(),
       id:  lastId,
   };
   setState({...state, sportsman : [ newObject, ...state.sportsman ]});
 };
 
-document.getElementsByClassName('but')[0].addEventListener('click', addSportsman);
+$('.but').bind('click', addSportsman);
 
 // Методы сортировки
 
@@ -143,7 +143,7 @@ function choiseMehtodSort() {
 }
 // Работа с кнопками
 
-document.getElementsByTagName('body')[0].addEventListener('click', function (event) {
+$('body').bind('click', function (event) {
    if (event.target.matches('.sortBut')) choiseMehtodSort();
    if (event.target.matches('.delSportsman')) deleteSportsman(event.target.dataset.id);
    if (event.target.matches('.upDate')) replaceInp(event.target.dataset.id);
