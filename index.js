@@ -55,9 +55,55 @@ let state = {
   sort: {
     field: 'name',
     direction: 'asc',
+  }, /*Добавление новых спортсменов*/
+  addSportsman: function addSportsman () {
+      lastId++;
+    let newObject = {
+        name:   $('.nameInp').val(),
+        sport:  $('.sportInp').val(),
+        salary: $('.solaryInp').val(),
+        id:  lastId,
+    };
+    setState({...state, sportsman : [ newObject, ...state.sportsman ]});
+  }, /* Сортировака спортсменов*/
+  sortString: function sortString() {
+    const sportsman = [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)];
+    const sort = {...state.sort, direction: 'asc' };
+    setState({...state, sportsman, sort});
   },
+  sortStringRevers: function sortStringRevers() {
+    const sportsman = [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)];
+    const sort = {...state.sort, direction: 'desc' };
+    setState({...state, sportsman, sort});
+  },
+  choiseMehtodSort: function choiseMehtodSort() {
+      if (state.sort.direction === 'desc') {
+        state.sortString();
+      } else {
+        state.sortStringRevers();
+      }
+  }, /* Удаление строк*/
+  deleteSportsman: function deleteSportsman(sportsmanId) {
+    const sportsman = state.sportsman.filter(function(obj) {
+      return obj.id != sportsmanId;
+    });
+    setState({...state, sportsman});
+  }, /* Редактирование строк*/
+  replaceInp: function replaceInp(editingId) {
+    setState({...state, editingId});
+  }, /* Сохранение строк*/
+  saveSportsman: function saveSportsman(id) {
+    const newSportsman = {
+        name: $('.inpReplace').val(),
+        sport: $('.inpReplace').val(),
+        salary: $('.inpReplace').val(),
+        id: $('.inpReplace').val(),
+    }
+  },
+
   editingId: 0,
 }
+
   // Отрисовываем таблицу
 
 let lastId = 10;
@@ -106,73 +152,14 @@ window.onload = function() {
   render();
 };
 
-// Добавляем новых спортсменов
+$('.but').bind('click', state.addSportsman);
 
-function addSportsman () {
-    lastId++;
-  let newObject = {
-      name:   $('.nameInp').val(),
-      sport:  $('.sportInp').val(),
-      salary: $('.solaryInp').val(),
-      id:  lastId,
-  };
-  setState({...state, sportsman : [ newObject, ...state.sportsman ]});
-};
-
-$('.but').bind('click', addSportsman);
-
-// Методы сортировки
-
-function sortString() {
-  const sportsman = [...state.sportsman.sort((a, b) => a.name < b.name ? 1 : -1)];
-  const sort = {...state.sort, direction: 'asc' };
-  setState({...state, sportsman, sort});
-}
-
-function sortStringRevers() {
-  const sportsman = [...state.sportsman.sort((a, b) => a.name > b.name ? 1 : -1)];
-  const sort = {...state.sort, direction: 'desc' };
-  setState({...state, sportsman, sort});
-}
-
-function choiseMehtodSort() {
-    if (state.sort.direction === 'desc') {
-      sortString();
-    } else {
-      sortStringRevers();
-    }
-}
 // Работа с кнопками
 
-$('body').on('click','.sortBut', choiseMehtodSort);
-$('body').on('click','.delSportsman', () => deleteSportsman(event.target.dataset.id));
-$('body').on('click','.upDate', () => replaceInp(event.target.dataset.id));
-$('body').on('click','.save', () => saveSportsman(event.target.dataset.id));
+$('body').on('click','.sortBut', state.choiseMehtodSort);
+$('body').on('click','.delSportsman', () => state.deleteSportsman(event.target.dataset.id));
+$('body').on('click','.upDate', () => state.replaceInp(event.target.dataset.id));
+$('body').on('click','.save', () => state.saveSportsman(event.target.dataset.id));
 
-// Удаление строк
-
-const deleteSportsman = (sportsmanId) => {
-  const sportsman = state.sportsman.filter(function(obj) {
-    return obj.id != sportsmanId;
-  });
-  setState({...state, sportsman});
-};
-
-// Редактирование строк
-
-const replaceInp = (editingId) => {
-  setState({...state, editingId});
-};
-
-const saveSportsman = (id) => {
-  const newSportsman = {
-      name: $('.inpReplace').val(),
-      sport: $('.inpReplace').val(),
-      salary: $('.inpReplace').val(),
-      id,
-  }
   const sportsman = state.sportsman.map(s => s.id == id ? newSportsman : s);
   setState({...state, sportsman, editingId: 0})
-}
-
-//
